@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block titulo %}{% endblock %} - Hemera}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='painel.css') }}">
+</head>
+<body>
+    <aside class="menu-lateral">
+        <div class="menu-logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Hemera Contábil">
+        </div>
+        <nav>
+           <a href="{{ url_for('inicio') }}" class="{{ 'ativo' if request.endpoint == 'inicio' }}">🏠 Início</a>
+            {% if session['tipo'] == 'empresa' %}
+            <a href="{{ url_for('lancamento') }}" class="{{ 'ativo' if request.endpoint == 'lancamento' }}">🧾 Lançamento de recibo</a>
+            <a href="{{ url_for('historico') }}" class="{{ 'ativo' if request.endpoint == 'historico' }}">📋 Histórico de recibos</a>
+            <a href="{{ url_for('complementares') }}" class="{{ 'ativo' if request.endpoint == 'complementares' }}">📎 Informações complementares</a>
+            {% endif %}
+        </nav>
+        <a href="{{ url_for('sair') }}">🚪 Sair</a>
+    </aside>
+
+    <div class="area">
+        <header class="topo">
+            <span>{{ session['nome'] }}</span>
+            <div class="avatar">{{ session['nome'][0] }}</div>
+        </header>
+        <main class="pagina">
+            {% block conteudo %}{% endblock %}
+        </main>
+    </div>
+</body>
+</html>

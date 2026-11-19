@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block titulo %}Início{% endblock %}
+
+{% block conteudo %}
+<h1>Olá, {{ nome }}</h1>
+<p class="subtitulo">Bem-vindo ao sistema de recibos.</p>
+
+{% if session['tipo'] == 'empresa' %}
+<div class="cartoes">
+    <a class="cartao" href="{{ url_for('lancamento') }}">
+        <span class="icone">🧾</span>
+        <h3>Lançamento de recibo</h3>
+        <p>Preencha um novo recibo de aluguel.</p>
+    </a>
+    <a class="cartao" href="{{ url_for('historico') }}">
+        <span class="icone">📋</span>
+        <h3>Histórico de recibos</h3>
+        <p>Veja os recibos já lançados.</p>
+    </a>
+    <a class="cartao" href="{{ url_for('complementares') }}">
+        <span class="icone">📎</span>
+        <h3>Informações complementares</h3>
+        <p>Anexe arquivos JPG e PDF.</p>
+    </a>
+</div>
+{% endif %}
+{% endblock %}
